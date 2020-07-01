@@ -1,88 +1,62 @@
-import json
-import requests
+from client.request import ApiRequest
 
 
-class Client():
-    def __init__(self, base_url, headers=None):
+class Client:
+    def __init__(self, base_url):
         self.base_url = base_url
-        self.headers = headers
+        self.headers = None
         self.token = None
+        self.request = ApiRequest()
 
     def login(self, username, password):
-        endpoint = f'{self.base_url}/auth/login'
-        payload = json.dumps({
-            "username": username,
-            "password": password
-        })
+        url = f'{self.base_url}/auth/login'
+        data = {
+            'username': username,
+            'password': password
+        }
 
-        headers = self.build_headers()
+        self.build_headers()
 
-        response = requests.post(endpoint, data=payload, headers=headers)
+        output = self.request.post(url, data, self.headers)
 
-        if response.status_code == 200:
-            output = json.loads(response.content.decode('utf-8'))
+        if output['data']:
             self.token = output['data']
-            return True
-        else:
-            return False
+            self.build_headers()
+
+        return output
 
     def build_headers(self):
         if self.token:
-            headers = {
+            self.headers = {
                 'Content-Type': 'application/json',
                 'X-API-KEY': self.token
             }
         else:
-            headers = {
+            self.headers = {
                 'Content-Type': 'application/json'
             }
 
-        return headers
-
     def products(self):
-        endpoint = f'{self.base_url}/products'
-        headers = self.build_headers()
+        url = f'{self.base_url}/products'
 
-        response = requests.get(endpoint, headers=headers)
-
-        if response.status_code == 200:
-            return json.loads(response.content.decode('utf-8'))
-        else:
-            return None
+        return self.request.get(url, headers=self.headers)
 
     def product(self, product_id):
         endpoint = f'{self.base_url}/products/{product_id}'
-        headers = self.build_headers()
 
-        response = requests.get(endpoint, headers=headers)
-
-        if response.status_code == 200:
-            return json.loads(response.content.decode('utf-8'))
-        else:
-            return None
+        return self.request.get(endpoint, headers=self.headers)
 
     def create(self, data):
-        endpoint = f'{self.base_url}/products/'
-        headers = self.build_headers()
-        payload = json.dumps(data)
+        url = f'{self.base_url}/products/'
 
-        response = requests.post(endpoint, data=payload, headers=headers)
-
-        return json.loads(response.content.decode('utf-8'))
+        return self.request.post(url, data, self.headers)
 
     def update(self, product_id, data):
-        endpoint = f'{self.base_url}/products/{product_id}'
-        headers = self.build_headers()
-        payload = json.dumps(data)
+        url = f'{self.base_url}/products/{product_id}'
 
-        response = requests.put(endpoint, data=payload, headers=headers)
-
-        return json.loads(response.content.decode('utf-8'))
+        return self.request.put(url, data, self.headers)
 
     def delete(self, product_id):
-        endpoint = f'{self.base_url}/products/{product_id}'
-        headers = self.build_headers()
+        url = f'{self.base_url}/products/{product_id}'
 
-        response = requests.delete(endpoint, headers=headers)
-
-        return json.loads(response.content.decode('utf-8'))
+        return self.request.delete(url, self.headers)
