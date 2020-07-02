@@ -7,7 +7,7 @@ setup(
   description = 'Client for Lego Price API',
   author = 'Luis Fernando do Nascimento',
   author_email = 'luisfn@gmail.com',
-  url = 'https://github.com/luisfn/lego-price-api-cliente',
+  url = 'https://github.com/luisfn/lego-price-api-client',
   download_url = 'https://github.com/luisfn/lego-price-api-client/archive/v0.1.1.tar.gz',
   keywords = ['Lego', 'API', 'Client'],
   install_requires=[
