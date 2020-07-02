@@ -1,4 +1,4 @@
-from lego_client.request import ApiRequest
+from legoclient.request import ApiRequest
 
 
 class Client:
