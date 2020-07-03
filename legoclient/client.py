@@ -2,7 +2,10 @@ from legoclient.request import ApiRequest
 
 
 class Client:
-    def __init__(self, base_url):
+
+    DEFAULT_BASE_URL='http://localhost:5000/api/v1'
+
+    def __init__(self, base_url=DEFAULT_BASE_URL):
         self.base_url = base_url
         self.headers = None
         self.token = None
