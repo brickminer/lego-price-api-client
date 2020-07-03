@@ -1,25 +1,29 @@
-from distutils.core import setup
-setup(
-  name = 'legoclient',
-  packages = ['legoclient'],
-  version = '0.1.4',
-  license='GNU',
-  description = 'Client for Lego Price API',
-  author = 'Luis Fernando do Nascimento',
-  author_email = 'luisfn@gmail.com',
-  url = 'https://github.com/brickminer/lego-price-api-client',
-  download_url = 'https://github.com/brickminer/lego-price-api-client/archive/v0.1.4.tar.gz',
-  keywords = ['Lego', 'API', 'Client'],
-  install_requires=[],
+import setuptools
+
+with open("README.md", "r") as fh:
+  long_description = fh.read()
+
+setuptools.setup(
+  name="legoclient",  # Replace with your own username
+  version="0.1.5",
+  author="Luis Fernando do Nascimento",
+  author_email="luisfn@gmail.com",
+  description="Client for Lego Price API",
+  long_description=long_description,
+  long_description_content_type="text/markdown",
+  url="https://github.com/brickminer/lego-price-api-client",
+  download_url = 'https://github.com/brickminer/lego-price-api-client/archive/v0.1.5.tar.gz',
+  keywords = ['Lego', 'Price', 'API', 'Client'],
+  packages=setuptools.find_packages(),
+  install_requires=[
+    'requests==2.24.0',
+  ],
   classifiers=[
     'Development Status :: 3 - Alpha',
     'Intended Audience :: Developers',
-    'Topic :: Software Development :: Build Tools',
+    'Topic :: Software Development :: Crawlers',
     'License :: OSI Approved :: GNU License',
-    'Programming Language :: Python :: 3',
-    'Programming Language :: Python :: 3.4',
-    'Programming Language :: Python :: 3.5',
-    'Programming Language :: Python :: 3.6',
     'Programming Language :: Python :: 3.7',
   ],
+  python_requires='>=3.7',
 )
