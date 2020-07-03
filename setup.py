@@ -2,13 +2,13 @@ from distutils.core import setup
 setup(
   name = 'legoclient',
   packages = ['legoclient'],
-  version = '0.1.3',
+  version = '0.1.4',
   license='GNU',
   description = 'Client for Lego Price API',
   author = 'Luis Fernando do Nascimento',
   author_email = 'luisfn@gmail.com',
-  url = 'https://github.com/luisfn/lego-price-api-client',
-  download_url = 'https://github.com/luisfn/lego-price-api-client/archive/v0.1.3.tar.gz',
+  url = 'https://github.com/brickminer/lego-price-api-client',
+  download_url = 'https://github.com/brickminer/lego-price-api-client/archive/v0.1.4.tar.gz',
   keywords = ['Lego', 'API', 'Client'],
   install_requires=[],
   classifiers=[
