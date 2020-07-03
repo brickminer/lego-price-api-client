@@ -22,7 +22,7 @@ class Client:
 
         output = self.request.post(url, data, self.headers)
 
-        if output['data']:
+        if output['result']:
             self.token = output['data']
             self.build_headers()
 
