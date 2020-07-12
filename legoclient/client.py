@@ -39,27 +39,37 @@ class Client:
                 'Content-Type': 'application/json'
             }
 
-    def products(self):
-        url = f'{self.base_url}/products'
+    def product_list(self):
+        url = f'{self.base_url}/products/'
 
         return self.request.get(url, headers=self.headers)
 
-    def product(self, product_id):
+    def product_get(self, product_id):
         endpoint = f'{self.base_url}/products/{product_id}'
 
         return self.request.get(endpoint, headers=self.headers)
 
-    def create(self, data):
+    def product_create(self, data):
         url = f'{self.base_url}/products/'
 
         return self.request.post(url, data, self.headers)
 
-    def update(self, product_id, data):
+    def product_update(self, product_id, data):
         url = f'{self.base_url}/products/{product_id}'
 
         return self.request.put(url, data, self.headers)
 
-    def delete(self, product_id):
+    def product_delete(self, product_id):
         url = f'{self.base_url}/products/{product_id}'
 
         return self.request.delete(url, self.headers)
+
+    def price_check_list(self):
+        url = f'{self.base_url}/price-checks/'
+
+        return self.request.get(url, headers=self.headers)
+
+    def price_check_create(self, data):
+        url = f'{self.base_url}/price-checks/'
+
+        return self.request.post(url, data, self.headers)
