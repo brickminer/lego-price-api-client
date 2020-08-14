@@ -9,12 +9,14 @@ class Client:
         self.base_url = base_url
         self.headers = None
         self.token = None
+        self.name = None
+        self.email = None
         self.request = ApiRequest()
 
-    def login(self, username, password):
+    def login(self, email, password):
         url = f'{self.base_url}/auth/login'
         data = {
-            'username': username,
+            'email': email,
             'password': password
         }
 
@@ -23,7 +25,9 @@ class Client:
         output = self.request.post(url, data, self.headers)
 
         if output['result']:
-            self.token = output['data']
+            self.token = output['token']
+            self.name = output['name']
+            self.email = output['email']
             self.build_headers()
 
         return output
