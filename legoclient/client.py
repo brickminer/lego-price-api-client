@@ -3,40 +3,42 @@ from legoclient.request import ApiRequest
 
 class Client:
 
-    DEFAULT_BASE_URL='http://localhost:5000/api/v1'
+    DEFAULT_BASE_URL='http://localhost:1337'
 
     def __init__(self, base_url=DEFAULT_BASE_URL):
         self.base_url = base_url
         self.headers = None
-        self.token = None
+        self.jwt = None
         self.name = None
+        self.username = None
         self.email = None
         self.request = ApiRequest()
 
     def login(self, email, password):
-        url = f'{self.base_url}/auth/login'
+        url = f'{self.base_url}/auth/local'
         data = {
-            'email': email,
+            'identifier': email,
             'password': password
         }
 
         self.build_headers()
 
-        output = self.request.post(url, data, self.headers)
+        response = self.request.post(url, data, self.headers)
 
-        if output['result']:
-            self.token = output['token']
-            self.name = output['name']
-            self.email = output['email']
+        if response['jwt']:
+            self.jwt = response['jwt']
+            self.name = response['user']['name']
+            self.username = response['user']['username']
+            self.email = response['user']['email']
             self.build_headers()
 
-        return output
+        return self
 
     def build_headers(self):
-        if self.token:
+        if self.jwt:
             self.headers = {
                 'Content-Type': 'application/json',
-                'X-API-KEY': self.token
+                'Authorization': f'Bearer {self.jwt}'
             }
         else:
             self.headers = {
