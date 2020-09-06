@@ -14,10 +14,10 @@ class Client:
         self.email = None
         self.request = ApiRequest()
 
-    def login(self, email, password):
+    def login(self, identifier, password):
         url = f'{self.base_url}/auth/local'
         data = {
-            'identifier': email,
+            'identifier': identifier,
             'password': password
         }
 
