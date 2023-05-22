@@ -16,7 +16,7 @@ setuptools.setup(
   keywords = ['Lego', 'Price', 'API', 'Client'],
   packages=setuptools.find_packages(),
   install_requires=[
-    'requests==2.24.0',
+    'requests==2.31.0',
   ],
   classifiers=[
     'Development Status :: 3 - Alpha',
